@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Расстояние. Перевод единиц измерения — 10 класс</title>
+<style>
+  :root{
+    --beige:#faf5ec;
+    --card:#ffffff;
+    --blue:#3b5bdb;
+    --blue-dark:#2b4b8f;
+    --purple:#7048e8;
+    --green:#2f9e44;
+    --red:#e03131;
+    --text:#2c2c3a;
+    --muted:#6b6b80;
+    --line:#efe7db;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:"Segoe UI",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;
+    background:var(--beige);
+    color:var(--text);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  header{
+    background:linear-gradient(135deg,#3b5bdb 0%,#7048e8 100%);
+    color:#fff;
+    padding:30px 18px 34px;
+    border-radius:0 0 28px 28px;
+    box-shadow:0 10px 28px rgba(59,91,219,.28);
+    text-align:center;
+  }
+  header h1{
+    margin:0 0 10px;
+    font-size:clamp(1.15rem,4.6vw,1.85rem);
+    letter-spacing:.5px;
+    line-height:1.25;
+  }
+  .badge{
+    display:inline-block;
+    background:rgba(255,255,255,.18);
+    border:1px solid rgba(255,255,255,.45);
+    padding:4px 16px;
+    border-radius:999px;
+    font-weight:700;
+    letter-spacing:2px;
+    font-size:.78rem;
+  }
+  header p.intro{
+    max-width:660px;
+    margin:16px auto 0;
+    font-size:.94rem;
+    opacity:.96;
+  }
+  main{
+    max-width:920px;
+    margin:0 auto;
+    padding:8px 16px 40px;
+  }
+  .section-title{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size:1.12rem;
+    font-weight:700;
+    margin:30px 0 14px;
+    color:var(--blue-dark);
+  }
+  .section-title svg{flex:0 0 auto;color:var(--purple);}
+
+  .ref-grid{display:grid;gap:14px;grid-template-columns:1fr;}
+  @media (min-width:720px){
+    .ref-grid{grid-template-columns:1fr 1fr;}
+    .card.wide{grid-column:1 / -1;}
+  }
+  .card{
+    background:var(--card);
+    border-radius:16px;
+    padding:16px 18px;
+    border:1px solid var(--line);
+    box-shadow:0 4px 14px rgba(44,44,58,.07);
+  }
+  .card h3{
+    margin:0 0 10px;
+    font-size:.98rem;
+    color:var(--blue-dark);
+    letter-spacing:.3px;
+    text-transform:uppercase;
+  }
+  ul.units{list-style:none;margin:0;padding:0;font-size:.94rem;}
+  ul.units li{padding:7px 0 7px 26px;position:relative;border-bottom:1px dashed #eee6f8;}
+  ul.units li:last-child{border-bottom:none;}
+  ul.units li::before{
+    content:"";position:absolute;left:6px;top:15px;
+    width:8px;height:8px;border-radius:50%;
+    background:linear-gradient(135deg,#3b5bdb,#7048e8);
+  }
+  ul.units b{color:var(--blue);}
+
+  .ladder{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin:6px 0 10px;}
+  .unit{
+    background:linear-gradient(135deg,#3b5bdb,#7048e8);color:#fff;
+    font-weight:700;padding:8px 13px;border-radius:10px;font-size:.9rem;
+    box-shadow:0 3px 8px rgba(59,91,219,.25);
+  }
+  .arrow{color:var(--purple);font-weight:700;font-size:.75rem;white-space:nowrap;}
+  .ladder-note{margin:0;text-align:center;font-size:.85rem;color:var(--muted);}
+
+  .formulas{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:10px;}
+  .formula{
+    background:#f3f0ff;border:1px dashed #b197fc;border-radius:12px;
+    padding:10px 16px;font-weight:700;color:var(--purple);font-size:1rem;
+  }
+  .formula-legend{margin:0;font-size:.87rem;color:var(--muted);}
+  .formula-legend b{color:var(--blue-dark);}
+
+  .progress-box{
+    background:#fff;border:1px solid var(--line);border-radius:14px;
+    padding:12px 16px;margin-bottom:16px;
+    box-shadow:0 4px 14px rgba(44,44,58,.06);
+  }
+  .progress-info{font-size:.87rem;color:var(--muted);margin-bottom:8px;}
+  .progress-info b{color:var(--blue);}
+  .progress-track{height:10px;background:#eee9f8;border-radius:999px;overflow:hidden;}
+  .progress-fill{
+    height:100%;width:0%;border-radius:999px;
+    background:linear-gradient(90deg,#3b5bdb,#7048e8);
+    transition:width .35s ease;
+  }
+
+  details.task{
+    background:#fff;border-radius:14px;margin-bottom:12px;
+    border:1px solid var(--line);border-left:5px solid var(--blue);
+    box-shadow:0 4px 14px rgba(44,44,58,.07);
+    overflow:hidden;transition:box-shadow .2s ease;
+  }
+  details.task[open]{box-shadow:0 8px 22px rgba(59,91,219,.16);}
+  details.task summary{
+    cursor:pointer;padding:14px 16px;font-weight:600;font-size:.95rem;
+    display:flex;align-items:center;gap:10px;list-style:none;user-select:none;
+    transition:background .2s ease;
+  }
+  details.task summary:hover{background:#f7f5ff;}
+  details.task summary::-webkit-details-marker{display:none;}
+  details.task summary::after{
+    content:"▾";margin-left:6px;color:var(--purple);font-size:.9rem;
+    transition:transform .2s ease;
+  }
+  details.task[open] summary::after{transform:rotate(180deg);}
+  .task-num{
+    background:linear-gradient(135deg,#3b5bdb,#7048e8);color:#fff;
+    width:26px;height:26px;border-radius:50%;display:grid;place-items:center;
+    font-size:.82rem;flex:0 0 auto;
+  }
+  .status-dot{margin-left:auto;font-weight:700;font-size:1.05rem;line-height:1;}
+  .status-dot.ok{color:var(--green);}
+  .status-dot.bad{color:var(--red);}
+  .task-body{
+    padding:0 16px 16px;border-top:1px dashed #eee6f8;
+    margin-top:2px;padding-top:14px;
+  }
+  .question{margin:0 0 10px;font-size:.95rem;}
+  .answer-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;}
+  input[type="text"]{
+    flex:1 1 150px;min-width:0;padding:11px 14px;
+    border:2px solid #dcd6ea;border-radius:10px;font-size:1rem;
+    font-family:inherit;color:var(--text);outline:none;
+    transition:border-color .2s, box-shadow .2s;background:#fdfcff;
+  }
+  input[type="text"]:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(112,72,232,.15);}
+  input.correct{border-color:var(--green);background:#f4fdf7;}
+  input.wrong{border-color:var(--red);background:#fff6f6;}
+  .unit-label{font-weight:700;color:var(--muted);font-size:.92rem;}
+  button{
+    font-family:inherit;cursor:pointer;border:none;border-radius:10px;
+    font-weight:600;transition:transform .15s ease, box-shadow .15s ease, filter .2s ease;
+  }
+  .btn-check{
+    background:linear-gradient(135deg,#3b5bdb,#7048e8);color:#fff;
+    padding:11px 20px;font-size:.93rem;
+    box-shadow:0 4px 12px rgba(59,91,219,.28);
+  }
+  .btn-check:hover{transform:translateY(-2px);box-shadow:0 7px 18px rgba(59,91,219,.4);}
+  .btn-check:active{transform:translateY(0);}
+  .feedback{display:none;margin-top:12px;border-radius:10px;font-size:.9rem;padding:12px 14px;}
+  .feedback.show{display:block;}
+  .feedback.ok{background:#e7f7ec;color:#1d6f31;border-left:4px solid var(--green);}
+  .feedback.bad{background:#fdecec;color:#a72121;border-left:4px solid var(--red);}
+
+  .finish-block{text-align:center;margin:22px 0 10px;}
+  .btn-finish{
+    background:linear-gradient(135deg,#7048e8,#3b5bdb);color:#fff;
+    padding:16px 38px;font-size:1.02rem;border-radius:14px;
+    letter-spacing:.5px;box-shadow:0 8px 22px rgba(112,72,232,.35);
+  }
+  .btn-finish:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(112,72,232,.45);}
+  .btn-finish:active{transform:translateY(0);}
+
+  .tips-grid{display:grid;gap:14px;grid-template-columns:1fr;}
+  @media (min-width:720px){.tips-grid{grid-template-columns:repeat(3,1fr);}}
+  .tip{
+    background:#fff;border-radius:16px;padding:16px;
+    border:1px solid var(--line);box-shadow:0 4px 14px rgba(44,44,58,.07);
+    font-size:.9rem;position:relative;transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .tip:hover{transform:translateY(-3px);box-shadow:0 10px 22px rgba(59,91,219,.15);}
+  .tip-icon{
+    width:36px;height:36px;border-radius:10px;display:grid;place-items:center;
+    background:linear-gradient(135deg,#eef1ff,#f3f0ff);color:var(--purple);margin-bottom:10px;
+  }
+  .tip b{display:block;margin-bottom:4px;color:var(--blue-dark);}
+  .tip p{margin:0;color:var(--muted);}
+
+  /* ====== ФИНАЛЬНЫЙ ТЕСТ ====== */
+  .test-intro{
+    background:#fff;border:1px solid var(--line);border-radius:14px;
+    padding:12px 16px;margin-bottom:16px;font-size:.88rem;color:var(--muted);
+    box-shadow:0 4px 14px rgba(44,44,58,.06);
+  }
+  .test-question{
+    background:#fff;border-radius:14px;padding:16px 18px;margin-bottom:14px;
+    border:1px solid var(--line);border-left:5px solid var(--purple);
+    box-shadow:0 4px 14px rgba(44,44,58,.07);
+    transition:box-shadow .2s ease;
+  }
+  .test-question:hover{box-shadow:0 8px 20px rgba(112,72,232,.13);}
+  .test-question h4{
+    margin:6px 0 12px;font-size:.96rem;color:var(--blue-dark);line-height:1.4;
+  }
+  .test-type{
+    display:inline-block;background:#eef1ff;color:var(--purple);
+    font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:999px;
+    letter-spacing:.5px;text-transform:uppercase;
+  }
+  .test-q-num{
+    display:inline-block;background:linear-gradient(135deg,#3b5bdb,#7048e8);
+    color:#fff;font-weight:700;width:24px;height:24px;border-radius:50%;
+    text-align:center;line-height:24px;font-size:.78rem;margin-right:8px;
+  }
+  .test-q-head{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+  .test-q-head .status-dot{margin-left:auto;}
+
+  .match-row{
+    display:flex;align-items:center;gap:10px;
+    margin-bottom:8px;flex-wrap:wrap;
+  }
+  .match-left{
+    flex:1 1 130px;background:#f7f5ff;padding:9px 12px;border-radius:10px;
+    font-weight:600;font-size:.9rem;color:var(--blue-dark);
+    border:1px solid #e6dffa;
+  }
+  .match-arrow{color:var(--purple);font-weight:700;}
+  .match-row select{
+    flex:1 1 150px;padding:9px 12px;border:2px solid #dcd6ea;
+    border-radius:10px;font-size:.9rem;font-family:inherit;
+    background:#fdfcff;color:var(--text);cursor:pointer;outline:none;
+    transition:border-color .2s, box-shadow .2s;
+  }
+  .match-row select:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(112,72,232,.13);}
+  .match-row select.correct{border-color:var(--green);background:#f4fdf7;}
+  .match-row select.wrong{border-color:var(--red);background:#fff6f6;}
+
+  .choice-list{list-style:none;padding:0;margin:0;}
+  .choice-list li{margin-bottom:8px;}
+  .choice-list label{
+    display:flex;align-items:flex-start;gap:10px;
+    padding:10px 12px;border-radius:10px;
+    border:2px solid #ece7f7;cursor:pointer;font-size:.92rem;
+    transition:background .15s, border-color .15s;
+  }
+  .choice-list label:hover{background:#faf8ff;border-color:#d5cbf0;}
+  .choice-list input[type="radio"],
+  .choice-list input[type="checkbox"]{
+    margin-top:3px;accent-color:var(--purple);
+    width:17px;height:17px;flex:0 0 auto;cursor:pointer;
+  }
+  .choice-list label.correct{border-color:var(--green);background:#f4fdf7;}
+  .choice-list label.wrong{border-color:var(--red);background:#fff6f6;}
+
+  .fill-input{
+    width:100%;max-width:340px;padding:12px 14px;font-size:1rem;
+    border:2px solid #dcd6ea;border-radius:10px;font-family:inherit;
+    background:#fdfcff;outline:none;transition:border-color .2s, box-shadow .2s;
+  }
+  .fill-input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(112,72,232,.15);}
+  .fill-input.correct{border-color:var(--green);background:#f4fdf7;}
+  .fill-input.wrong{border-color:var(--red);background:#fff6f6;}
+
+  .test-actions{margin-top:12px;display:flex;justify-content:flex-end;}
+
+  /* ====== МОДАЛЬНОЕ ОКНО ====== */
+  .overlay{
+    position:fixed;inset:0;background:rgba(30,25,50,.55);
+    display:none;align-items:center;justify-content:center;
+    padding:18px;z-index:50;
+  }
+  .overlay.show{display:flex;}
+  .modal{
+    background:#fff;border-radius:22px;padding:26px 22px 22px;
+    max-width:460px;width:100%;text-align:center;
+    box-shadow:0 24px 60px rgba(0,0,0,.32);
+    animation:pop .25s ease;max-height:92vh;overflow-y:auto;
+  }
+  @keyframes pop{from{transform:scale(.9);opacity:0;}to{transform:scale(1);opacity:1;}}
+  .grade-circle{
+    width:96px;height:96px;border-radius:50%;display:grid;place-items:center;
+    margin:0 auto 14px;font-size:2.4rem;font-weight:800;color:#fff;
+    background:linear-gradient(135deg,#3b5bdb,#7048e8);
+    box-shadow:0 10px 24px rgba(59,91,219,.35);
+  }
+  .grade-circle.g5{background:linear-gradient(135deg,#2f9e44,#51cf66);box-shadow:0 10px 24px rgba(47,158,68,.35);}
+  .grade-circle.g4{background:linear-gradient(135deg,#3b5bdb,#4c6ef5);}
+  .grade-circle.g3{background:linear-gradient(135deg,#e8890c,#f59f00);box-shadow:0 10px 24px rgba(232,137,12,.35);}
+  .grade-circle.g2{background:linear-gradient(135deg,#c92a2a,#e03131);box-shadow:0 10px 24px rgba(224,49,49,.35);}
+  .modal h2{margin:0 0 6px;font-size:1.25rem;color:var(--blue-dark);}
+  .modal .score-line{font-size:1rem;margin:0 0 4px;font-weight:600;}
+  .modal .percent-line{color:var(--muted);font-size:.87rem;margin:0 0 16px;}
+  .rec-box{
+    background:#f7f5ff;border:1px dashed #b197fc;border-radius:14px;
+    padding:14px;text-align:left;font-size:.9rem;color:#4a3f7a;margin-bottom:18px;
+  }
+  .rec-box b{color:var(--purple);display:block;margin-bottom:6px;}
+  .rec-box ul{margin:0;padding-left:18px;}
+  .rec-box li{margin-bottom:6px;}
+  .rec-box li:last-child{margin-bottom:0;}
+  .btn-restart{
+    background:linear-gradient(135deg,#3b5bdb,#7048e8);color:#fff;
+    padding:13px 28px;font-size:.95rem;border-radius:12px;width:100%;
+    box-shadow:0 6px 18px rgba(59,91,219,.3);
+  }
+  .btn-restart:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(59,91,219,.42);}
+
+  footer{text-align:center;font-size:.8rem;color:var(--muted);padding:0 16px 30px;}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>РАССТОЯНИЕ. ПЕРЕВОД ЕДИНИЦ ИЗМЕРЕНИЯ</h1>
+  <span class="badge">10 КЛАСС</span>
+  <p class="intro">
+    Расстояние — это длина пути между двумя точками. Чтобы сравнивать и вычислять расстояния,
+    важно свободно переводить единицы измерения и правильно применять формулу <b>S = v · t</b>.
+    Выполни 6 заданий практики, пройди финальный тест из 10 вопросов и получи оценку!
+  </p>
+</header>
+
+<main>
+
+  <!-- ============ СПРАВОЧНЫЕ МАТЕРИАЛЫ ============ -->
+  <h2 class="section-title">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+    </svg>
+    Справочные материалы
+  </h2>
+
+  <div class="ref-grid">
+    <div class="card">
+      <h3>Единицы измерения</h3>
+      <ul class="units">
+        <li><b>1 км</b> = 1000 м</li>
+        <li><b>1 м</b> = 10 дм = 100 см = 1000 мм</li>
+        <li><b>1 дм</b> = 10 см = 100 мм</li>
+        <li><b>1 см</b> = 10 мм</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Правило «лестницы»</h3>
+      <div class="ladder">
+        <span class="unit">км</span>
+        <span class="arrow">→ ×10</span>
+        <span class="unit">м</span>
+        <span class="arrow">→ ×10</span>
+        <span class="unit">дм</span>
+        <span class="arrow">→ ×10</span>
+        <span class="unit">см</span>
+        <span class="arrow">→ ×10</span>
+        <span class="unit">мм</span>
+      </div>
+      <p class="ladder-note">
+        Идём вправо (к меньшим единицам) — <b>умножаем на 10</b>.<br>
+        Идём влево (к большим единицам) — <b>делим на 10</b>.
+      </p>
+    </div>
+
+    <div class="card wide">
+      <h3>Формула расстояния</h3>
+      <div class="formulas">
+        <span class="formula">S = v · t</span>
+        <span class="formula">v = S : t</span>
+        <span class="formula">t = S : v</span>
+      </div>
+      <p class="formula-legend">
+        <b>S</b> — расстояние (путь), <b>v</b> — скорость, <b>t</b> — время.
+        Внимание: единицы должны быть согласованы! Если скорость в км/ч, то время — в часах, а путь — в километрах.
+      </p>
+    </div>
+  </div>
+
+  <!-- ============ ПРАКТИКА ============ -->
+  <h2 class="section-title">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 20h9"/>
+      <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/>
+    </svg>
+    Практика
+  </h2>
+
+  <div class="progress-box">
+    <div class="progress-info">Верно решено: <b id="solvedCount">0</b> из <b>16</b> заданий</div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <details class="task" id="task1">
+    <summary><span class="task-num">1</span> Переведи 5 м в см <span class="status-dot" id="dot1"></span></summary>
+    <div class="task-body">
+      <p class="question">Переведи <b>5 м</b> в сантиметры. Запиши только число.</p>
+      <div class="answer-row">
+        <input type="text" id="in1" inputmode="decimal" placeholder="Введите ответ">
+        <span class="unit-label">см</span>
+        <button class="btn-check" data-task="1">Проверить</button>
+      </div>
+      <div class="feedback" id="fb1"></div>
+    </div>
+  </details>
+
+  <details class="task" id="task2">
+    <summary><span class="task-num">2</span> Переведи 3 км в м <span class="status-dot" id="dot2"></span></summary>
+    <div class="task-body">
+      <p class="question">Переведи <b>3 км</b> в метры. Запиши только число.</p>
+      <div class="answer-row">
+        <input type="text" id="in2" inputmode="decimal" placeholder="Введите ответ">
+        <span class="unit-label">м</span>
+        <button class="btn-check" data-task="2">Проверить</button>
+      </div>
+      <div class="feedback" id="fb2"></div>
+    </div>
+  </details>
+
+  <details class="task" id="task3">
+    <summary><span class="task-num">3</span> Переведи 450 см в м <span class="status-dot" id="dot3"></span></summary>
+    <div class="task-body">
+      <p class="question">Переведи <b>450 см</b> в метры. Ответ можно записать десятичной дробью (например, 4.5 или 4,5).</p>
+      <div class="answer-row">
+        <input type="text" id="in3" inputmode="decimal" placeholder="Введите ответ">
+        <span class="unit-label">м</span>
+        <button class="btn-check" data-task="3">Проверить</button>
+      </div>
+      <div class="feedback" id="fb3"></div>
+    </div>
+  </details>
+
+  <details class="task" id="task4">
+    <summary><span class="task-num">4</span> Переведи 36 м в дм <span class="status-dot" id="dot4"></span></summary>
+    <div class="task-body">
+      <p class="question">Переведи <b>36 м</b> в дециметры. Запиши только число.</p>
+      <div class="answer-row">
+        <input type="text" id="in4" inputmode="decimal" placeholder="Введите ответ">
+        <span class="unit-label">дм</span>
+        <button class="btn-check" data-task="4">Проверить</button>
+      </div>
+      <div class="feedback" id="fb4"></div>
+    </div>
+  </details>
+
+  <details class="task" id="task5">
+    <summary><span class="task-num">5</span> Задача на движение: путь <span class="status-dot" id="dot5"></span></summary>
+    <div class="task-body">
+      <p class="question">Автомобиль ехал со скоростью <b>60 км/ч</b> в течение <b>2 ч</b>. Какое расстояние он проехал?</p>
+      <div class="answer-row">
+        <input type="text" id="in5" inputmode="decimal" placeholder="Введите ответ">
+        <span class="unit-label">км</span>
+        <button class="btn-check" data-task="5">Проверить</button>
+      </div>
+      <div class="feedback" id="fb5"></div>
+    </div>
+  </details>
+
+  <details class="task" id="task6">
+    <summary><span class="task-num">6</span> Задача на движение: скорость <span class="status-dot" id="dot6"></span></summary>
+    <div class="task-body">
+      <p class="question">Поезд прошёл <b>540 км</b> за <b>6 ч</b>. Найдите скорость поезда.</p>
+      <div class="answer-row">
+        <input type="text" id="in6" inputmode="decimal" placeholder="Введите ответ">
+        <span class="unit-label">км/ч</span>
+        <button class="btn-check" data-task="6">Проверить</button>
+      </div>
+      <div class="feedback" id="fb6"></div>
+    </div>
+  </details>
+
+  <!-- ============ ФИНАЛЬНЫЙ ТЕСТ ============ -->
+  <h2 class="section-title">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 21h8"/><path d="M12 17v4"/>
+      <path d="M7 4h10v5a5 5 0 0 1-10 0z"/>
+      <path d="M17 5h3a2 2 0 0 1-2 4"/>
+      <path d="M7 5H4a2 2 0 0 0 2 4"/>
+    </svg>
+    Финальный тест
+  </h2>
+
+  <div class="test-intro">
+    <b>Тест из 10 вопросов.</b> 3 задания на сопоставление · 2 вопроса с одним верным ответом ·
+    2 вопроса с тремя верными ответами из пяти · 1 задание «дополни фразу» ·
+    2 задачи с выбором правильного ответа. Проверяйте каждый вопрос кнопкой «Проверить», затем нажмите «Завершить работу».
+  </div>
+
+  <!-- ===== ВОПРОС 1 (сопоставление) ===== -->
+  <div class="test-question" id="tq1">
+    <div class="test-q-head">
+      <span class="test-q-num">1</span>
+      <span class="test-type">Сопоставление</span>
+      <span class="status-dot" id="dot_t1"></span>
+    </div>
+    <h4>Соотнесите единицы измерения с их эквивалентами</h4>
+    <div class="match-row">
+      <span class="match-left">1 км</span>
+      <span class="match-arrow">→</span>
+      <select data-q="t1" data-idx="0">
+        <option value="">— выберите —</option>
+        <option value="10 м">10 м</option>
+        <option value="100 м">100 м</option>
+        <option value="1000 м">1000 м</option>
+      </select>
+    </div>
+    <div class="match-row">
+      <span class="match-left">1 м</span>
+      <span class="match-arrow">→</span>
+      <select data-q="t1" data-idx="1">
+        <option value="">— выберите —</option>
+        <option value="1000 см">1000 см</option>
+        <option value="100 см">100 см</option>
+        <option value="10 см">10 см</option>
+      </select>
+    </div>
+    <div class="match-row">
+      <span class="match-left">1 дм</span>
+      <span class="match-arrow">→</span>
+      <select data-q="t1" data-idx="2">
+        <option value="">— выберите —</option>
+        <option value="1 см">1 см</option>
+        <option value="10 см">10 см</option>
+        <option value="100 см">100 см</option>
+      </select>
+    </div>
+    <div class="test-actions"><button class="btn-check" data-test="t1">Проверить</button></div>
+    <div class="feedback" id="fb_t1"></div>
+  </div>
+
+  <!-- ===== ВОПРОС 2 (сопоставление) ===== -->
+  <div class="test-question" id="tq2">
+    <div class="test-q-head">
+      <span class="test-q-num">2</span>
+      <span class="test-type">Сопоставление</span>
+      <span class="status-dot" id="dot_t2"></span>
+    </div>
+    <h4>Соотнесите формулу с названием величины</h4>
+    <div class="match-row">
+      <span class="match-left">S = v · t</span>
+      <span class="match-arrow">→</span>
+      <select data-q="t2" data-idx="0">
+        <option value="">— выберите —</option>
+        <option value="расстояние">расстояние</option>
+        <option value="скорость">скорость</option>
+        <option value="время">время</option>
+      </select>
+    </div>
+    <div class="match-row">
+      <span class="match-left">v = S : t</span>
+      <span class="match-arrow">→</span>
+      <select data-q="t2" data-idx="1">
+        <option value="">— выберите —</option>
+        <option value="расстояние">расстояние</option>
+        <option value="скорость">скорость</option>
+        <option value="время">время</option>
+      </select>
+    </div>
+    <div class="match-row">
+      <span class="match-left">t = S : v</span>
+      <span class="match-arrow">→</span>
+      <select data-q="t2" data-idx="2">
+        <option value="">— выберите —</option>
+        <option value="расстояние">расстояние</option>
+        <option value="скорость">скорость</option>
+        <option value="время">время</option>
+      </select>
+    </div>
+    <div class="test-actions"><button class="btn-check" data-test="t2">Проверить</button></div>
+    <div class="feedback" id="fb_t2"></div>
+  </div>
+
+  <!-- ===== ВОПРОС 3 (сопоставление) ===== -->
+  <div class="test-question" id="tq3">
+    <div class="test-q-head">
+      <span class="test-q-num">3</span>
+      <span class="test-type">Сопоставление</span>
+      <span class="status-dot" id="dot_t3"></span>
+    </div>
+    <h4>Соотнесите перевод единиц с результатом</h4>
+    <div class="match-row">
+      <span class="match-left">5 км =</span>
+      <span class="match-arrow">→</span>
+      <select data-q="t3" data-idx="0">
+        <option value="">— выберите —</option>
+        <option value="50 м">50 м</option>
+        <option value="500 м">500 м</option>
+        <option value="5000 м">5000 м</option>
+      </select>
+    </div>
+    <div class="match-row">
+      <span class="match-left">300 см =</span>
+      <span class="match-arrow">→</span>
+      <select data-q="t3" data-idx="1">
+        <option value="">— выберите —</option>
+        <option value="3 м">3 м</option>
+        <option value="30 м">30 м</option>
+        <option value="3000 м">3000 м</option>
+      </select>
+    </div>
+    <div class="match-row">
+      <span class="match-left">2 ч =</span>
+      <span class="match-arrow">→</span>
+      <select data-q="t3" data-idx="2">
+        <option value="">— выберите —</option>
+        <option value="60 мин">60 мин</option>
+        <option value="120 мин">120 мин</option>
+        <option value="200 мин">200 мин</option>
+      </select>
+    </div>
+    <div class="test-actions"><button class="btn-check" data-test="t3">Проверить</button></div>
+    <div class="feedback" id="fb_t3"></div>
+  </div>
+
+  <!-- ===== ВОПРОС 4 (один верный ответ) ===== -->
+  <div class="test-question" id="tq4">
+    <div class="test-q-head">
+      <span class="test-q-num">4</span>
+      <span class="test-type">Один ответ</span>
+      <span class="status-dot" id="dot_t4"></span>
+    </div>
+    <h4>Сколько сантиметров в одном метре?</h4>
+    <ul class="choice-list">
+      <li><label><input type="radio" name="t4" value="10"><span>10 см</span></label></li>
+      <li><label><input type="radio" name="t4" value="100"><span>100 см</span></label></li>
+      <li><label><input type="radio" name="t4" value="1000"><span>1000 см</span></label></li>
+      <li><label><input type="radio" name="t4" value="10000"><span>10 000 см</span></label></li>
+    </ul>
+    <div class="test-actions"><button class="btn-check" data-test="t4">Проверить</button></div>
+    <div class="feedback" id="fb_t4"></div>
+  </div>
+
+  <!-- ===== ВОПРОС 5 (один верный ответ) ===== -->
+  <div class="test-question" id="tq5">
+    <div class="test-q-head">
+      <span class="test-q-num">5</span>
+      <span class="test-type">Один ответ</span>
+      <span class="status-dot" id="dot_t5"></span>
+    </div>
+    <h4>Автомобиль проехал 240 км за 4 часа. Какова его скорость?</h4>
+    <ul class="choice-list">
+      <li><label><input type="radio" name="t5" value="40"><span>40 км/ч</span></label></li>
+      <li><label><input type="radio" name="t5" value="60"><span>60 км/ч</span></label></li>
+      <li><label><input type="radio" name="t5" value="80"><span>80 км/ч</span></label></li>
+      <li><label><input type="radio" name="t5" value="960"><span>960 км/ч</span></label></li>
+    </ul>
+    <div class="test-actions"><button class="btn-check" data-test="t5">Проверить</button></div>
+    <div class="feedback" id="fb_t5"></div>
+  </div>
+
+  <!-- ===== ВОПРОС 6 (3 верных из 5) ===== -->
+  <div class="test-question" id="tq6">
+    <div class="test-q-head">
+      <span class="test-q-num">6</span>
+      <span class="test-type">3 из 5</span>
+      <span class="status-dot" id="dot_t6"></span>
+    </div>
+    <h4>Выберите <b>три</b> единицы измерения расстояния</h4>
+    <ul class="choice-list">
+      <li><label><input type="checkbox" name="t6" value="мм"><span>мм</span></label></li>
+      <li><label><input type="checkbox" name="t6" value="кг"><span>кг</span></label></li>
+      <li><label><input type="checkbox" name="t6" value="км"><span>км</span></label></li>
+      <li><label><input type="checkbox" name="t6" value="с"><span>с (секунда)</span></label></li>
+      <li><label><input type="checkbox" name="t6" value="см"><span>см</span></label></li>
+    </ul>
+    <div class="test-actions"><button class="btn-check" data-test="t6">Проверить</button></div>
+    <div class="feedback" id="fb_t6"></div>
+  </div>
+
+  <!-- ===== ВОПРОС 7 (3 верных из 5) ===== -->
+  <div class="test-question" id="tq7">
+    <div class="test-q-head">
+      <span class="test-q-num">7</span>
+      <span class="test-type">3 из 5</span>
+      <span class="status-dot" id="dot_t7"></span>
+    </div>
+    <h4>Выберите <b>три</b> верных равенства</h4>
+    <ul class="choice-list">
+      <li><label><input type="checkbox" name="t7" value="a1"><span>1 км = 100 м</span></label></li>
+      <li><label><input type="checkbox" name="t7" value="a2"><span>1 м = 100 см</span></label></li>
+      <li><label><input type="checkbox" name="t7" value="a3"><span>1 дм = 10 см</span></label></li>
+      <li><label><input type="checkbox" name="t7" value="a4"><span>1 см = 100 мм</span></label></li>
+      <li><label><input type="checkbox" name="t7" value="a5"><span>1 км = 1000 м</span></label></li>
+    </ul>
+    <div class="test-actions"><button class="btn-check" data-test="t7">Проверить</button></div>
+    <div class="feedback" id="fb_t7"></div>
+  </div>
+
+  <!-- ===== ВОПРОС 8 (дополни фразу) ===== -->
+  <div class="test-question" id="tq8">
+    <div class="test-q-head">
+      <span class="test-q-num">8</span>
+      <span class="test-type">Дополни фразу</span>
+      <span class="status-dot" id="dot_t8"></span>
+    </div>
+    <h4>Дополните фразу: «При переходе к меньшим единицам измерения нужно ________ на 10».</h4>
+    <input type="text" class="fill-input" id="t8_input" placeholder="Введите одно слово" autocomplete="off">
+    <div class="test-actions"><button class="btn-check" data-test="t8">Проверить</button></div>
+    <div class="feedback" id="fb_t8"></div>
+  </div>
+
+  <!-- ===== ВОПРОС 9 (задача, один ответ) ===== -->
+  <div class="test-question" id="tq9">
+    <div class="test-q-head">
+      <span class="test-q-num">9</span>
+      <span class="test-type">Задача</span>
+      <span class="status-dot" id="dot_t9"></span>
+    </div>
+    <h4>Поезд движется со скоростью 80 км/ч в течение 3 часов. Какое расстояние он проедет?</h4>
+    <ul class="choice-list">
+      <li><label><input type="radio" name="t9" value="83"><span>83 км</span></label></li>
+      <li><label><input type="radio" name="t9" value="120"><span>120 км</span></label></li>
+      <li><label><input type="radio" name="t9" value="160"><span>160 км</span></label></li>
+      <li><label><input type="radio" name="t9" value="240"><span>240 км</span></label></li>
+    </ul>
+    <div class="test-actions"><button class="btn-check" data-test="t9">Проверить</button></div>
+    <div class="feedback" id="fb_t9"></div>
+  </div>
+
+  <!-- ===== ВОПРОС 10 (задача, один ответ) ===== -->
+  <div class="test-question" id="tq10">
+    <div class="test-q-head">
+      <span class="test-q-num">10</span>
+      <span class="test-type">Задача</span>
+      <span class="status-dot" id="dot_t10"></span>
+    </div>
+    <h4>Велосипедист проехал 45 км за 3 часа. Найдите его скорость.</h4>
+    <ul class="choice-list">
+      <li><label><input type="radio" name="t10" value="15"><span>15 км/ч</span></label></li>
+      <li><label><input type="radio" name="t10" value="42"><span>42 км/ч</span></label></li>
+      <li><label><input type="radio" name="t10" value="48"><span>48 км/ч</span></label></li>
+      <li><label><input type="radio" name="t10" value="135"><span>135 км/ч</span></label></li>
+    </ul>
+    <div class="test-actions"><button class="btn-check" data-test="t10">Проверить</button></div>
+    <div class="feedback" id="fb_t10"></div>
+  </div>
+
+  <!-- ===== КНОПКА ФИНАЛА ===== -->
+  <div class="finish-block">
+    <button class="btn-finish" id="btnFinish">Завершить работу</button>
+  </div>
+
+  <!-- ============ ПОЛЕЗНЫЕ СОВЕТЫ ============ -->
+  <h2 class="section-title">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 18h6"/><path d="M10 22h4"/>
+      <path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>
+    </svg>
+    Полезные советы
+  </h2>
+
+  <div class="tips-grid">
+    <div class="tip">
+      <div class="tip-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+      </div>
+      <b>Проверяй единицы измерения</b>
+      <p>В ответе всегда указывай, в чём измеряется результат: см, м, км или км/ч.</p>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M5 8h14"/><path d="M5 16h14"/></svg>
+      </div>
+      <b>Одинаковые единицы</b>
+      <p>Перед вычислением приведи скорость, время и путь к одним и тем же единицам.</p>
+    </div>
+    <div class="tip">
+      <div class="tip-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><path d="M6 20V9"/><path d="M12 20V4"/><path d="M18 20v-7"/></svg>
+      </div>
+      <b>Используй «лестницу»</b>
+      <p>Перевод через «лестницу» — быстро и удобно: вправо умножаем, влево делим на 10.</p>
+    </div>
+  </div>
+
+</main>
+
+<footer>Интерактивный рабочий лист · Расстояние. Перевод единиц измерения · 10 класс</footer>
+
+<!-- ============ МОДАЛЬНОЕ ОКНО ============ -->
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <div class="grade-circle" id="gradeCircle">5</div>
+    <h2 id="modalTitle">Ваша оценка: <span id="gradeText">5</span></h2>
+    <p class="score-line" id="scoreLine">Вы правильно решили 16 из 16 заданий</p>
+    <p class="percent-line" id="percentLine">Результат: 100%</p>
+    <div class="rec-box" id="recBox"></div>
+    <button class="btn-restart" id="btnRestart">Начать заново</button>
+  </div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var TOTAL = 16; // 6 практических + 10 тестовых
+
+  /* ---------- ЭТАЛОНЫ ПРАКТИКИ ---------- */
+  var PRACTICE = {
+    "1": { answer: 500,  hint: "1 м = 100 см, значит 5 × 100 = 500 см." },
+    "2": { answer: 3000, hint: "1 км = 1000 м, значит 3 × 1000 = 3000 м." },
+    "3": { answer: 4.5,  hint: "Переходим к большей единице — делим: 450 : 100 = 4,5 м." },
+    "4": { answer: 360,  hint: "1 м = 10 дм, значит 36 × 10 = 360 дм." },
+    "5": { answer: 120,  hint: "S = v · t = 60 км/ч · 2 ч = 120 км." },
+    "6": { answer: 90,   hint: "v = S : t = 540 км : 6 ч = 90 км/ч." }
+  };
+
+  /* ---------- ЭТАЛОНЫ ФИНАЛЬНОГО ТЕСТА ---------- */
+  var TEST = {
+    t1:  { type: "match",  answers: ["1000 м", "100 см", "10 см"],
+           hint: "1 км = 1000 м, 1 м = 100 см, 1 дм = 10 см." },
+    t2:  { type: "match",  answers: ["расстояние", "скорость", "время"],
+           hint: "S = v·t — путь, v = S:t — скорость, t = S:v — время." },
+    t3:  { type: "match",  answers: ["5000 м", "3 м", "120 мин"],
+           hint: "5 км × 1000 = 5000 м; 300 см : 100 = 3 м; 2 ч × 60 = 120 мин." },
+    t4:  { type: "single", answer: "100",
+           hint: "1 м = 100 см." },
+    t5:  { type: "single", answer: "60",
+           hint: "v = S : t = 240 км : 4 ч = 60 км/ч." },
+    t6:  { type: "multi",  answers: ["мм", "км", "см"],
+           hint: "мм, км и см — единицы длины. Кг — масса, с — время." },
+    t7:  { type: "multi",  answers: ["a2", "a3", "a5"],
+           hint: "Верно: 1 м = 100 см; 1 дм = 10 см; 1 км = 1000 м." },
+    t8:  { type: "fill",   answers: ["умножить", "умножаем", "умножать"],
+           hint: "При переходе к меньшим единицам умножаем на 10." },
+    t9:  { type: "single", answer: "240",
+           hint: "S = v · t = 80 км/ч · 3 ч = 240 км." },
+    t10: { type: "single", answer: "15",
+           hint: "v = S : t = 45 км : 3 ч = 15 км/ч." }
+  };
+
+  /* ---------- ХРАНЕНИЕ РЕЗУЛЬТАТОВ ---------- */
+  var results = {
+    "1": null, "2": null, "3": null, "4": null, "5": null, "6": null,
+    "t1": null, "t2": null, "t3": null, "t4": null, "t5": null,
+    "t6": null, "t7": null, "t8": null, "t9": null, "t10": null
+  };
+
+  function $(id) { return document.getElementById(id); }
+
+  function normalize(value) {
+    var s = String(value).trim().replace(/,/g, ".").replace(/[^0-9.\-]/g, "");
+    if (s === "" || s === "-" || s === "." || s === "-.") return NaN;
+    return parseFloat(s);
+  }
+
+  /* ---------- ОБЩИЙ ПРОГРЕСС ---------- */
+  function updateProgress() {
+    var solved = 0;
+    for (var k in results) if (results[k] === true) solved++;
+    $("solvedCount").textContent = solved;
+    $("progressFill").style.width = (solved / TOTAL * 100) + "%";
+  }
+
+  /* ============================================================
+     ПРАКТИКА
+  ============================================================ */
+  function checkPractice(id) {
+    var task = PRACTICE[id];
+    var input = $("in" + id);
+    var fb = $("fb" + id);
+    var dot = $("dot" + id);
+    var raw = input.value.trim();
+
+    if (raw === "") {
+      fb.className = "feedback bad show";
+      fb.innerHTML = "<b>Введите ответ.</b> Поле не должно быть пустым.";
+      return;
+    }
+
+    var value = normalize(raw);
+    var ok = !isNaN(value) && Math.abs(value - task.answer) < 1e-6;
+    results[id] = ok;
+
+    if (ok) {
+      fb.className = "feedback ok show";
+      fb.innerHTML = "<b>Верно!</b> " + task.hint;
+      dot.textContent = "✓"; dot.className = "status-dot ok";
+      input.classList.remove("wrong"); input.classList.add("correct");
+    } else {
+      fb.className = "feedback bad show";
+      fb.innerHTML = "<b>Ошибка. Попробуй ещё раз.</b> " + task.hint;
+      dot.textContent = "✗"; dot.className = "status-dot bad";
+      input.classList.remove("correct"); input.classList.add("wrong");
+    }
+    updateProgress();
+  }
+
+  /* ============================================================
+     ФИНАЛЬНЫЙ ТЕСТ
+  ============================================================ */
+  function checkTest(qid) {
+    var q = TEST[qid];
+    var fb = $("fb_" + qid);
+    var dot = $("dot_" + qid);
+    var ok = false;
+    var errorMsg = "";
+
+    /* ---------- СОПОСТАВЛЕНИЕ ---------- */
+    if (q.type === "match") {
+      var selects = document.querySelectorAll('select[data-q="' + qid + '"]');
+      var allFilled = true;
+      var allCorrect = true;
+      Array.prototype.forEach.call(selects, function (sel, i) {
+        if (!sel.value) allFilled = false;
+        var isOk = sel.value === q.answers[i];
+        sel.classList.remove("correct", "wrong");
+        if (sel.value) sel.classList.add(isOk ? "correct" : "wrong");
+        if (!isOk) allCorrect = false;
+      });
+      if (!allFilled) {
+        fb.className = "feedback bad show";
+        fb.innerHTML = "<b>Заполните все строки.</b> Выберите значение в каждом выпадающем списке.";
+        return;
+      }
+      ok = allCorrect;
+      errorMsg = q.hint;
+    }
+
+    /* ---------- ОДИН ВЕРНЫЙ ОТВЕТ ---------- */
+    else if (q.type === "single") {
+      var checked = document.querySelector('input[name="' + qid + '"]:checked');
+      if (!checked) {
+        fb.className = "feedback bad show";
+        fb.innerHTML = "<b>Выберите один вариант ответа.</b>";
+        return;
+      }
+      ok = checked.value === q.answer;
+      errorMsg = q.hint;
+      // подсветка выбранного
+      var labels = document.querySelectorAll('input[name="' + qid + '"]');
+      Array.prototype.forEach.call(labels, function (inp) {
+        inp.parentNode.classList.remove("correct", "wrong");
+        if (inp.checked) inp.parentNode.classList.add(ok ? "correct" : "wrong");
+      });
+    }
+
+    /* ---------- 3 ПРАВИЛЬНЫХ ИЗ 5 ---------- */
+    else if (q.type === "multi") {
+      var selected = [];
+      document.querySelectorAll('input[name="' + qid + '"]:checked').forEach(function (cb) {
+        selected.push(cb.value);
+      });
+      if (selected.length !== 3) {
+        fb.className = "feedback bad show";
+        fb.innerHTML = "<b>Нужно выбрать ровно 3 варианта.</b> Сейчас выбрано: " + selected.length + ".";
+        return;
+      }
+      // точное совпадение множеств
+      var ansSet = q.answers.slice().sort().join("|");
+      var selSet = selected.slice().sort().join("|");
+      ok = ansSet === selSet;
+      errorMsg = q.hint;
+      // подсветка: зелёным — выбранные верные, красным — выбранные неверные
+      document.querySelectorAll('input[name="' + qid + '"]').forEach(function (cb) {
+        cb.parentNode.classList.remove("correct", "wrong");
+        var isCorrectOption = q.answers.indexOf(cb.value) !== -1;
+        if (cb.checked && isCorrectOption) cb.parentNode.classList.add("correct");
+        if (cb.checked && !isCorrectOption) cb.parentNode.classList.add("wrong");
+      });
+    }
+
+    /* ---------- ДОПОЛНИ ФРАЗУ ---------- */
+    else if (q.type === "fill") {
+      var inp = $("t8_input");
+      var val = inp.value.trim().toLowerCase().replace(/ё/g, "е");
+      if (val === "") {
+        fb.className = "feedback bad show";
+        fb.innerHTML = "<b>Введите слово.</b>";
+        return;
+      }
+      ok = q.answers.some(function (a) { return a === val; });
+      errorMsg = q.hint;
+      inp.classList.remove("correct", "wrong");
+      inp.classList.add(ok ? "correct" : "wrong");
+    }
+
+    /* ---------- СОХРАНЕНИЕ РЕЗУЛЬТАТА И ФИДБЕК ---------- */
+    results[qid] = ok;
+
+    if (ok) {
+      fb.className = "feedback ok show";
+      fb.innerHTML = "<b>Верно!</b> " + errorMsg;
+      dot.textContent = "✓"; dot.className = "status-dot ok";
+    } else {
+      fb.className = "feedback bad show";
+      fb.innerHTML = "<b>Ошибка. Попробуй ещё раз.</b> " + errorMsg;
+      dot.textContent = "✗"; dot.className = "status-dot bad";
+    }
+    updateProgress();
+  }
+
+  /* ---------- ОБРАБОТЧИКИ ПРАКТИКИ ---------- */
+  document.querySelectorAll('.btn-check[data-task]').forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      checkPractice(btn.getAttribute("data-task"));
+    });
+  });
+
+  document.querySelectorAll('input[type="text"][id^="in"]').forEach(function (inp) {
+    inp.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        checkPractice(inp.id.replace("in", ""));
+      }
+    });
+  });
+
+  /* ---------- ОБРАБОТЧИКИ ТЕСТА ---------- */
+  document.querySelectorAll('.btn-check[data-test]').forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      checkTest(btn.getAttribute("data-test"));
+    });
+  });
+
+  $("t8_input").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") { e.preventDefault(); checkTest("t8"); }
+  });
+
+  /* ---------- РЕКОМЕНДАЦИИ ---------- */
+  function buildRecommendations() {
+    var wrongPractice = [];
+    var wrongTest = [];
+    var unchecked = [];
+
+    for (var i = 1; i <= 6; i++) {
+      var k = String(i);
+      if (results[k] === null) unchecked.push("П" + i);
+      else if (results[k] === false) wrongPractice.push(i);
+    }
+    for (var j = 1; j <= 10; j++) {
+      var kt = "t" + j;
+      if (results[kt] === null) unchecked.push("Т" + j);
+      else if (results[kt] === false) wrongTest.push(j);
+    }
+
+    var items = [];
+
+    if (unchecked.length > 0) {
+      items.push("<li>Не все задания проверены: " + unchecked.join(", ") +
+                 ". Нажмите «Проверить» в этих блоках, чтобы получить точную оценку.</li>");
+    }
+    if (wrongPractice.length > 0) {
+      items.push("<li><b>Повторите правило «лестницы»</b> и прямой/обратный перевод единиц длины.</li>");
+    }
+    if (wrongTest.length > 0) {
+      var list = wrongTest.join(", ");
+      items.push("<li>В финальном тесте обратите внимание на задания № " + list +
+                 ". Пересмотрите определения единиц, формулы S = v·t, v = S:t, t = S:v и согласование единиц.</li>");
+    }
+    if (items.length === 0) {
+      items.push("<li>Отличная работа! Все задания выполнены верно. Для закрепления попробуйте задачи со скоростью в м/с и временем в минутах.</li>");
+    }
+    return "<b>Рекомендации:</b><ul>" + items.join("") + "</ul>";
+  }
+
+  /* ---------- ИТОГ ---------- */
+  function finish() {
+    var correct = 0;
+    for (var k in results) if (results[k] === true) correct++;
+
+    var percentRaw = correct / TOTAL * 100;
+    var percent = Math.round(percentRaw);
+    var grade;
+    if (percentRaw >= 90) grade = 5;
+    else if (percentRaw >= 75) grade = 4;
+    else if (percentRaw >= 60) grade = 3;
+    else grade = 2;
+
+    var circle = $("gradeCircle");
+    circle.textContent = grade;
+    circle.className = "grade-circle g" + grade;
+    $("gradeText").textContent = grade;
+    $("scoreLine").textContent = "Вы правильно решили " + correct + " из " + TOTAL + " заданий";
+    $("percentLine").textContent = "Результат: " + percent + "%";
+    $("recBox").innerHTML = buildRecommendations();
+    $("overlay").classList.add("show");
+  }
+
+  /* ---------- СБРОС ---------- */
+  function resetAll() {
+    for (var k in results) results[k] = null;
+
+    // практика
+    for (var i = 1; i <= 6; i++) {
+      var inp = $("in" + i);
+      inp.value = "";
+      inp.classList.remove("correct", "wrong");
+      var fb = $("fb" + i);
+      fb.className = "feedback"; fb.innerHTML = "";
+      var d = $("dot" + i);
+      d.textContent = ""; d.className = "status-dot";
+      var det = $("task" + i);
+      if (det) det.open = false;
+    }
+
+    // тест
+    for (var j = 1; j <= 10; j++) {
+      var qid = "t" + j;
+      var fbT = $("fb_" + qid);
+      fbT.className = "feedback"; fbT.innerHTML = "";
+      var dT = $("dot_" + qid);
+      dT.textContent = ""; dT.className = "status-dot";
+
+      // match: сброс select
+      document.querySelectorAll('select[data-q="' + qid + '"]').forEach(function (sel) {
+        sel.value = "";
+        sel.classList.remove("correct", "wrong");
+      });
+      // radio/checkbox
+      document.querySelectorAll('input[name="' + qid + '"]').forEach(function (inp) {
+        inp.checked = false;
+        inp.parentNode.classList.remove("correct", "wrong");
+      });
+    }
+    // fill
+    var fill = $("t8_input");
+    fill.value = "";
+    fill.classList.remove("correct", "wrong");
+
+    updateProgress();
+    $("overlay").classList.remove("show");
+  }
+
+  $("btnFinish").addEventListener("click", finish);
+  $("btnRestart").addEventListener("click", resetAll);
+
+  $("overlay").addEventListener("click", function (e) {
+    if (e.target === $("overlay")) $("overlay").classList.remove("show");
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") $("overlay").classList.remove("show");
+  });
+
+  updateProgress();
+})();
+</script>
+
+</body>
+</html>
